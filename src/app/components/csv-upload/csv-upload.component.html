@@ -1,0 +1,159 @@
+<!-- <div class="container mt-5">
+  <div class="mb-3">
+    <label for="formFile" class="form-label">Upload CSV File</label>
+    <input class="form-control" type="file" id="formFile" (change)="onFileChange($event)">
+  </div>
+
+  <div *ngIf="errors.length > 0" class="alert alert-danger">
+    <h4 class="alert-heading">Validation Errors</h4>
+    <ul>
+      <li *ngFor="let error of errors">
+        Row {{ error.index }}: {{ error.errorFields.join(', ') }} are invalid
+      </li>
+    </ul>
+  </div>
+
+  <table *ngIf="data.length > 0" class="table table-bordered">
+    <thead class="thead-light">
+      <tr>
+        <th>Student Name</th>
+        <th>Roll Number</th>
+        <th>Department</th>
+        <th>Age</th>
+        <th>Passion</th>
+        <th>OE Course</th>
+        <th>Elective Course</th>
+        <th>Backlogs</th>
+        <th>Career Goals</th>
+        <th>Remarks</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of data; let i = index" [ngClass]="{ 'table-danger': hasErrors(row) }">
+        <td>
+          {{ row['name'] }}
+          <i *ngIf="row.errors?.['name']" class="fas fa-exclamation-triangle text-danger"></i>
+        </td>
+        <td>
+          {{ row['roll'] }}
+          <i *ngIf="row.errors?.['roll']" class="fas fa-exclamation-triangle text-danger"></i>
+        </td>
+        <td>
+          {{ row['dept'] }}
+          <i *ngIf="row.errors?.['dept']" class="fas fa-exclamation-triangle text-danger"></i>
+        </td>
+        <td>
+          {{ row['age'] }}
+          <i *ngIf="row.errors?.['age']" class="fas fa-exclamation-triangle text-danger"></i>
+        </td>
+        <td>
+          {{ row['passion'] }}
+          <i *ngIf="row.errors?.['passion']" class="fas fa-exclamation-triangle text-danger"></i>
+        </td>
+        <td>
+          {{ row['oe_course'] }}
+          <i *ngIf="row.errors?.['oe_course']" class="fas fa-exclamation-triangle text-danger"></i>
+        </td>
+        <td>
+          {{ row['elective_course'] }}
+          <i *ngIf="row.errors?.['elective_course']" class="fas fa-exclamation-triangle text-danger"></i>
+        </td>
+        <td>
+          {{ row['backlogs'] }}
+          <i *ngIf="row.errors?.['backlogs']" class="fas fa-exclamation-triangle text-danger"></i>
+        </td>
+        <td>
+          {{ row['career_goals'] }}
+          <i *ngIf="row.errors?.['career_goals']" class="fas fa-exclamation-triangle text-danger"></i>
+        </td>
+        <td>
+          {{ row['remarks'] }}
+          <i *ngIf="row.errors?.['remarks']" class="fas fa-exclamation-triangle text-danger"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div> -->
+
+
+
+<div class="container mt-5">
+  <div class="mb-3">
+    <label for="formFile" class="form-label">Upload CSV File</label>
+    <input class="form-control" type="file" id="formFile" (change)="onFileChange($event)">
+  </div>
+
+  <div *ngIf="errors.length > 0" class="alert alert-danger">
+    <h4 class="alert-heading">Validation Errors</h4>
+    <ul>
+      <li *ngFor="let error of errors">
+        Row {{ error.index }}: {{ error.errorFields.join(', ') }} are invalid
+      </li>
+    </ul>
+  </div>
+
+  <table *ngIf="data.length > 0" class="table table-bordered">
+    <thead class="thead-light">
+      <tr>
+        <th>Student Name</th>
+        <th>Roll Number</th>
+        <th>Department</th>
+        <th>Age</th>
+        <th>Passion</th>
+        <th>OE Course</th>
+        <th>Elective Course</th>
+        <th>Backlogs</th>
+        <th>Career Goals</th>
+        <th>Remarks</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of data; let i = index"
+          [ngClass]="{
+            'table-danger': hasErrors(row),
+            'table-warning': hasEmptyFields(row)
+          }">
+        <td [ngClass]="{ 'text-danger': !row.name }">
+          {{ row.name || '!' }}
+          <i *ngIf="!row.name" class="fas fa-exclamation-triangle text-danger"></i>
+        </td>
+        <td [ngClass]="{ 'text-danger': !row.roll }">
+          {{ row.roll || '!' }}
+          <i *ngIf="!row.roll" class="fas fa-exclamation-triangle text-danger"></i>
+        </td>
+        <td [ngClass]="{ 'text-danger': !row.dept }">
+          {{ row.dept || '!' }}
+          <i *ngIf="!row.dept" class="fas fa-exclamation-triangle text-danger"></i>
+        </td>
+        <td [ngClass]="{ 'text-danger': !row.age }">
+          {{ row.age || '!' }}
+          <i *ngIf="!row.age" class="fas fa-exclamation-triangle text-danger"></i>
+        </td>
+        <td [ngClass]="{ 'text-danger': !row.passion }">
+          {{ row.passion || '!' }}
+          <i *ngIf="!row.passion" class="fas fa-exclamation-triangle text-danger"></i>
+        </td>
+        <td [ngClass]="{ 'text-danger': !row.oe_course }">
+          {{ row.oe_course || '!' }}
+          <i *ngIf="!row.oe_course" class="fas fa-exclamation-triangle text-danger"></i>
+        </td>
+        <td [ngClass]="{ 'text-danger': !row.elective_course }">
+          {{ row.elective_course || '!' }}
+          <i *ngIf="!row.elective_course" class="fas fa-exclamation-triangle text-danger"></i>
+        </td>
+        <td [ngClass]="{ 'text-danger': !row.backlogs }">
+          {{ row.backlogs || '!' }}
+          <i *ngIf="!row.backlogs" class="fas fa-exclamation-triangle text-danger"></i>
+        </td>
+        <td [ngClass]="{ 'text-danger': !row.career_goals }">
+          {{ row.career_goals || '!' }}
+          <i *ngIf="!row.career_goals" class="fas fa-exclamation-triangle text-danger"></i>
+        </td>
+        <td>
+          {{ row.remarks || '!' }}
+          <i *ngIf="!row.remarks" class="fas fa-exclamation-triangle text-danger"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
